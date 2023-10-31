@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <HeaderContainer>
-      <Link to="/users">USER</Link>
-      <Link to="/posts">POST</Link>
+      <CustomLink to="/users">USER</CustomLink>
+      <CustomLink to="/posts">POST</CustomLink>
+      {/* <Link to="/users">USER</Link>
+      <Link to="/posts">POST</Link> */}
     </HeaderContainer>
   );
 };
@@ -16,4 +18,8 @@ const HeaderContainer = styled.div`
   background-color: red;
 `;
 
+const CustomLink = styled(Link)`
+  border-radius: 10rem;
+  background-color: antiquewhite;
+`;
 export default Header;
