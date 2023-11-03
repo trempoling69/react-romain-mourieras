@@ -1,32 +1,19 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import Button from '../component/Button';
 import TextField from '../component/Form/TextField';
 import ListItem from '../component/ListItem';
 import { createFakeUser } from '../services/createFakeUsers';
 import styled from '@emotion/styled';
-import { User } from '../models/User';
 import Loading from '../component/Loading';
+import { useUser } from '../hooks/useUsers';
 
-const User = () => {
-  const [users, setUser] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
+const UserView = () => {
+  const { users, loading, setUser, deleteUser } = useUser();
   const [searchText, setSearchText] = useState('');
-
-  useEffect(() => {
-    setTimeout(() => {
-      setUser(createFakeUser(10));
-      setLoading(false);
-    }, 500);
-  }, []);
 
   const createUser = () => {
     const newUser = createFakeUser(1);
     setUser([...users, ...newUser]);
-  };
-
-  const deleteUser = (id: number) => {
-    const newUser = users.filter((user) => user.id !== id);
-    setUser(newUser);
   };
 
   const findUser = useMemo(() => {
@@ -70,4 +57,4 @@ const SearchContainer = styled.div`
   display: flex;
   gap: 1rem;
 `;
-export default User;
+export default UserView;

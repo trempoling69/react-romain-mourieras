@@ -1,25 +1,15 @@
 import { createFakePost } from '../services/createFakePost';
 import styled from '@emotion/styled';
-import { useState, useEffect, useMemo } from 'react';
-import { Post } from '../models/Post';
+import { useState, useMemo } from 'react';
 import PostDisplay from '../component/PostDisplay';
 import Button from '../component/Button';
 import TextField from '../component/Form/TextField';
 import Loading from '../component/Loading';
+import { usePost } from '../hooks/usePosts';
 
-const Post = () => {
-  console.log(createFakePost(10));
-  const [posts, setPosts] = useState<Post[]>([]);
+const PostView = () => {
+  const { posts, loading, setPosts } = usePost();
   const [searchText, setSearchText] = useState('');
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const generatePost = createFakePost(10);
-      setPosts(generatePost);
-      setLoading(false);
-    }, 500);
-  }, []);
 
   const findPost = useMemo(() => {
     if (!searchText) return posts;
@@ -62,4 +52,4 @@ const MainContainer = styled.main`
   flex-direction: column;
   align-items: center;
 `;
-export default Post;
+export default PostView;
