@@ -1,13 +1,9 @@
-import ItemList from '../component/e-comm/itemList';
+import ItemList from '../component/e-comm/ItemList';
 
-type Props = {
-  cheeses: { name: string; photo: string; isAdmin?: boolean }[];
-};
-
-const ItemView = ({ cheeses }: Props) => {
+const ItemView = () => {
   return (
     <div>
-      <ItemList cheeses={cheeses} />
+      <ItemList />
     </div>
   );
 };

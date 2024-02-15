@@ -2,7 +2,10 @@ import './App.css';
 import styled from '@emotion/styled';
 import Header from './component/Header';
 import ItemView from './views/ItemView';
-import { UserContext } from './context/UserContext';
+import { UserContextProvider } from './context/UserContext';
+import { useState } from 'react';
+import { CheeseContext } from './context/CheeseContext';
+import Footer from './component/Footer/Footer';
 
 const cheeses = [
   { name: 'gouda', photo: 'https://www.laboitedufromager.com/wp-content/uploads/Gouda-48Mois_3Bis_OK_600600.jpg' },
@@ -17,17 +20,23 @@ const cheeses = [
     isAdmin: true,
   },
 ];
-const value = {
-  user: { name: 'Raymond', isAdmin: false },
-};
+// const value = {
+//   user: null,
+//   // { name: 'Raymond', isAdmin: false },
+// };
 const App = () => {
+  const [isSelected, setIsSelected] = useState(false);
+  const value = { cheeses, isSelected, setIsSelected };
   return (
-    <UserContext.Provider value={value}>
-      <MainContainer>
-        <Header />
-        <ItemView cheeses={cheeses} />
-      </MainContainer>
-    </UserContext.Provider>
+    <CheeseContext.Provider value={value}>
+      <UserContextProvider>
+        <MainContainer>
+          <Header />
+          <ItemView />
+        </MainContainer>
+      </UserContextProvider>
+      <Footer />
+    </CheeseContext.Provider>
   );
 };
 

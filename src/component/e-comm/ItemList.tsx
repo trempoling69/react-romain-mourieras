@@ -1,10 +1,9 @@
+import { useContext } from 'react';
 import Item from './Item';
+import { CheeseContext } from '../../context/CheeseContext';
 
-type Props = {
-  cheeses: { name: string; photo: string; isAdmin?: boolean }[];
-};
-
-const ItemList = ({ cheeses }: Props) => {
+const ItemList = () => {
+  const { cheeses } = useContext(CheeseContext);
   return (
     <div style={{ display: 'flex', gap: '2rem' }}>
       {cheeses.map((cheese) => (
